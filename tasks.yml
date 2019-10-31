@@ -1,0 +1,17 @@
+- debug :
+    msg : "executing task"
+#Create dir
+- name: Create dir
+  file:
+    path: "{{ project_name }}/roles/{{role_name}}/{{ dir_data.name }}"
+    state: directory
+  when: dir_data is defined  
+#Create files if available
+- name: Create files
+  file:
+    path: "{{ project_name }}/roles/{{role_name}}/{{ dir_data.name }}/{{file_item}}"
+    state: touch 
+  loop: "{{dir_data.files}}"
+  when: dir_data.files is defined and dir_data.files|length > 0
+  loop_control:
+    loop_var: file_item
