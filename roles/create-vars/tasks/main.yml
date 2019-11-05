@@ -1,0 +1,30 @@
+- block: 
+   - name: Create group_vars 
+     file:
+        path: "{{ location }}/group_vars"
+        state: directory  
+     when: group_vars.create
+
+   - name: Create group_vars files
+     file:
+        path: "{{ location }}/group_vars/{{ item }}"
+        state: touch  
+     loop: "{{group_vars.files}}"
+     when: group_vars.create and group_vars.files|length > 0
+
+   - name: Create host_vars dir
+     file:
+        path: "{{ location }}/host_vars"
+        state: directory  
+     when: host_vars.create 
+
+   - name: Create host_vars files
+     file:
+        path: "{{ location }}/host_vars/{{ item }}"
+        state: touch  
+     loop: "{{host_vars.files}}"
+     when: host_vars.create and host_vars.files|length > 0
+  
+  when: "location is defined"
+
+   

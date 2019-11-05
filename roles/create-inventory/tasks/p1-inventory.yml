@@ -1,0 +1,12 @@
+---
+  - name: Create inventory files
+    file:
+      path: "{{ tmp_project_name }}/{{ item }}"
+      state: touch
+    loop: "{{ inventory_files }}"
+
+  - name: Create var dirs
+    include_role:
+       name: create-vars  
+    vars :
+       location : "{{ tmp_project_name }}"

@@ -1,0 +1,30 @@
+---
+  - name: Create inventory parent dir
+    file:
+        path: "{{ tmp_project_name }}/inventories"
+        state: directory   
+
+  - name: Create env specific dir
+    file:
+      path: "{{ tmp_project_name }}/inventories/{{ dir_item }}"
+      state: directory
+    loop: "{{ inventory_files }}"
+    loop_control:
+      loop_var: dir_item
+
+  - name: Create inventory files 
+    file:
+      path: "{{ tmp_project_name }}/inventories/{{ dir_item }}/hosts"
+      state: touch
+    loop: "{{ inventory_files }}"
+    loop_control:
+      loop_var: dir_item
+
+  - name: Create var dirs
+    include_role:
+       name: create-vars  
+    vars :
+       location : "{{ tmp_project_name }}/inventories/{{ dir_item }}"
+    loop: "{{ inventory_files }}"
+    loop_control:
+      loop_var: dir_item

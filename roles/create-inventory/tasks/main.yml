@@ -1,0 +1,10 @@
+---
+  - name: Create inventory files for pattern 2
+    include_tasks: 
+        file: p2-inventory.yml
+    when : "pattern|int == 2"
+
+  - name: Create inventory files for pattern 1
+    include_tasks: 
+        file: p1-inventory.yml
+    when : "pattern|int != 2"

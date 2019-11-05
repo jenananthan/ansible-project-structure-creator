@@ -1,3 +1,4 @@
+pattern: "{{ p | default('1') }}"
 project_name: ansible-sample-project
 inventory_files: [production,staging]
 group_vars: 
@@ -5,7 +6,7 @@ group_vars:
     files : [group1.yml, group2.yml]        # here we assign variables to particular groups
 host_vars: 
     create: true,
-    files : [group1.yml, group2.yml]        # here we assign variables to particular systems
+    files : [host1.yml, host2.yml]        # here we assign variables to particular systems
 library: 
     create: true                              # if any custom modules, put them here (optional)
 module_utils: 
@@ -15,7 +16,7 @@ filter_plugins:
 playbooks: 
     create: true
     files: [site.yml ,webservers.yml,dbservers.yml] #play books
-role_name: "{{ role | default('defualt') }}"
+role_dir_name: "{{ role | default('defualt') }}"
 roles_dir:
                 # this hierarchy represents a "role"
         -  name: tasks 

@@ -1,0 +1,11 @@
+- name: Create role dirs
+  include_tasks: 
+    file: custom.yml
+    apply:
+      tags:
+        - create_role
+  vars: 
+    - dir_data : "{{ item }}"  
+  when: item.create
+  loop: "{{roles_dir}}"
+  tags: create_role

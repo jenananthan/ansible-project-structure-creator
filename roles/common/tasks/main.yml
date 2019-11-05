@@ -1,0 +1,24 @@
+   - name: Create module_utils 
+     file:
+        path: "{{ tmp_project_name }}/module_utils"
+        state: directory  
+     when: module_utils.create
+
+   - name: Create filter_plugins 
+     file:
+        path: "{{ tmp_project_name }}/filter_plugins"
+        state: directory  
+     when: filter_plugins.create
+
+   - name: Create library 
+     file:
+        path: "{{ tmp_project_name }}/library"
+        state: directory  
+     when: library.create
+
+   - name: Create play books
+     file:
+        path: "{{ tmp_project_name }}/{{ item }}"
+        state: touch  
+     loop: "{{playbooks.files}}"
+     when: playbooks.create and playbooks.files|length > 0
