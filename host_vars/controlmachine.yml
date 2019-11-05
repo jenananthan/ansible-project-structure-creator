@@ -1,48 +1,49 @@
-pattern: "{{ p | default('1') }}"
-project_name: ansible-sample-project
-inventory_files: [production,staging]
-group_vars: 
-    create: true,
-    files : [group1.yml, group2.yml]        # here we assign variables to particular groups
-host_vars: 
-    create: true,
-    files : [host1.yml, host2.yml]        # here we assign variables to particular systems
-library: 
-    create: true                              # if any custom modules, put them here (optional)
-module_utils: 
-    create: true                         # if any custom module_utils to support modules, put them here (optional)
-filter_plugins: 
-    create: true                      # if any custom filter plugins, put them here (optional)
-playbooks: 
+pattern: "{{ p | default('1') }}"            # Directory Layout(1) | Alternative Directory Layout(2). Default is Directory Layout.
+project_name: ansible-sample-project         # Project name
+inventory_files: [production,staging]        # Inventory files based on envrionments.
+group_vars:                                  # here we assign variables to particular groups
+    create: true,                            
+    files : [group1.yml, group2.yml]        
+host_vars:                                   # here we assign variables to particular systems
+    create: true,                            
+    files : [host1.yml, host2.yml]           
+library:                                     # if any custom modules, put them here (optional)
+    create: true                             
+module_utils:                                # if any custom module_utils to support modules, put them here (optional)
+    create: true                         
+filter_plugins:                              # if any custom filter plugins, put them here (optional)
+    create: true                      
+playbooks:                                   #play books
     create: true
-    files: [site.yml ,webservers.yml,dbservers.yml] #play books
+    files: [site.yml ,webservers.yml,dbservers.yml] 
 role_dir_name: "{{ role | default('defualt') }}"
-roles_dir:
-                # this hierarchy represents a "role"
-        -  name: tasks 
+
+roles_dir:                                    # this hierarchy represents a "role"
+               
+        -  name: tasks                        #  <-- tasks file can include smaller files if warranted
            create: true,
-           files: [main.yml]     #  <-- tasks file can include smaller files if warranted
-        -  name: handlers 
+           files: [main.yml]     
+        -  name: handlers                     #  <-- handlers file  
            create: true,
-           files: [main.yml]   #  <-- handlers file
-        -  name: templates  
+           files: [main.yml]   
+        -  name: templates                   #  <-- files for use with the template resource,templates end in .j2
            create: true,
-           files: [sample.j2]      #  <-- files for use with the template resource,templates end in .j2
+           files: [sample.j2]      
         -  name: files  
            create: true,
-           files: [sample.txt,sample.sh]          #           
-        -  name: vars 
+           files: [sample.txt,sample.sh]                    
+        -  name: vars                        #  <-- variables associated with this role
            create: true,
-           files: [main.yml]     #  <-- variables associated with this role
-        -  name: defaults 
+           files: [main.yml]     
+        -  name: defaults                     #  <-- default lower priority variables for this role
            create: true,
-           files: [main.yml]      #  <-- default lower priority variables for this role
+           files: [main.yml]     
         -  name: meta 
            create: true,
-           files: [main.yml]      #  <-- role dependencies
-        -  name: library 
-           create: true         # roles can also include custom modules
-        -  name: module_utils 
-           create: true    # roles can also include custom module_utils
-        -  name: lookup_plugins 
-           create: true  # or other types of plugins, like lookup in this case
+           files: [main.yml]                 #  <-- role dependencies
+        -  name: library                     # roles can also include custom modules
+           create: true         
+        -  name: module_utils                # roles can also include custom module_utils
+           create: true    
+        -  name: lookup_plugins              # or other types of plugins, like lookup in this case
+           create: true  

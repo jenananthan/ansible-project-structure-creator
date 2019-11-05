@@ -21,6 +21,6 @@
      include_role:
         name: create-role
 
-  #  - name: Move project dir
-  #    command: mv {{ tmp_project_name }} ../{{ project_name }}
+   - name: Move project dir
+     command: mv {{ tmp_project_name }} ../{{ project_name }}
   
