@@ -1,5 +1,5 @@
 # ansible-project-structure-creator
-Ansible best practices documentation suggests two directory strcutures 
+Ansible best practices documentation suggests two directory structures 
 1. Directory Layout (https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#directory-layout)
 2. Alternative Directory Layout (https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#alternative-directory-layout)
 
