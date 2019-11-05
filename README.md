@@ -15,6 +15,7 @@ This project is created using  ansible to create the directory layouts suggested
 ```sh
 ansible-playbook site.yml   -i inventory
 ```
+4. New directory structure will be created out side the ansible-project-structure-creator directory
 
 ## Create Alternative Directory Layout
 1. Clone the project
@@ -24,3 +25,4 @@ ansible-playbook site.yml   -i inventory
 ```sh
 ansible-playbook site.yml -i inventory  --extra-vars "p=2"
 ```
+4. New directory structure will be created out side the ansible-project-structure-creator directory
